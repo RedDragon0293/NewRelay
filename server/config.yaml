@@ -1,0 +1,7 @@
+server:
+  sms_tcp_port: 1885
+  notify_tcp_port: 1884
+  ws_port: 9091
+  auth_token: "chang**********************oken"
+  log_file: "relay-server.log"
+  max_buffer: 500

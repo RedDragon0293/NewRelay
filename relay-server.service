@@ -1,0 +1,35 @@
+[Unit]
+Description=Relay Server - SMS verification code relay service
+Documentation=https://github.com/user/relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nobody
+Group=nogroup
+WorkingDirectory=/opt/relay
+# Ensure the working directory is writable (runs as root before dropping privileges).
+ExecStartPre=+/usr/bin/install -d -o nobody -g nogroup -m 755 /opt/relay
+ExecStart=/opt/relay/relay-server /opt/relay/config.yaml
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=relay-server
+
+# Security hardening (optional, adjust as needed).
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/relay
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictRealtime=yes
+
+[Install]
+WantedBy=multi-user.target

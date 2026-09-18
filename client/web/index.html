@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relay - 验证码同步</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="status-bar" class="status-bar disconnected">
+  <span id="status-dot"></span>
+  <span id="status-text">断开</span>
+  <span id="status-server"></span>
+</div>
+
+<nav>
+  <button class="tab active" data-tab="history">📋 历史记录</button>
+  <button class="tab" data-tab="settings">⚙️ 设置</button>
+</nav>
+
+<section id="tab-history" class="tab-content active">
+  <div class="toolbar">
+    <button id="btn-refresh">🔄 刷新</button>
+    <button id="btn-clear" class="danger">🗑 清空</button>
+    <span id="total-count"></span>
+  </div>
+  <div id="message-list"></div>
+  <div id="pagination"></div>
+</section>
+
+<section id="tab-settings" class="tab-content">
+  <form id="settings-form">
+    <label>服务器地址
+      <input type="text" id="cfg-host" placeholder="127.0.0.1">
+    </label>
+    <label>WebSocket 端口
+      <input type="number" id="cfg-ws-port" placeholder="9091">
+    </label>
+    <label>Auth Token
+      <input type="text" id="cfg-token" placeholder="your-secret-token">
+    </label>
+    <button type="submit">💾 保存设置</button>
+  </form>
+  <p class="hint">修改后需重启客户端生效。</p>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

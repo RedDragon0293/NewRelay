@@ -1,0 +1,56 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
+
+/* Status bar */
+.status-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; color:#fff; font-size:14px; }
+.status-bar.connected { background: #27ae60; }
+.status-bar.disconnected { background: #e74c3c; }
+#status-dot { width:10px; height:10px; border-radius:50%; background:#fff; }
+#status-server { margin-left:auto; opacity:.8; font-size:12px; }
+
+/* Navigation */
+nav { display:flex; background:#fff; border-bottom:2px solid #e0e0e0; }
+nav .tab { flex:1; padding:14px; border:none; background:none; font-size:16px; cursor:pointer; color:#666; transition:.2s; }
+nav .tab:hover { color:#333; background:#f9f9f9; }
+nav .tab.active { color:#2980b9; border-bottom:3px solid #2980b9; margin-bottom:-2px; }
+
+/* Content */
+.tab-content { display:none; padding:16px; }
+.tab-content.active { display:block; }
+
+/* Toolbar */
+.toolbar { display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+.toolbar button { padding:8px 16px; border:1px solid #ccc; border-radius:6px; background:#fff; cursor:pointer; font-size:14px; transition:.2s; }
+.toolbar button:hover { background:#f0f0f0; }
+.toolbar button.danger { color:#e74c3c; border-color:#e74c3c; }
+.toolbar button.danger:hover { background:#fde8e8; }
+#total-count { margin-left:auto; color:#888; font-size:13px; }
+
+/* Message list */
+.message-card { background:#fff; border-radius:8px; padding:14px 16px; margin-bottom:10px; box-shadow: 0 1px 3px rgba(0,0,0,.08); display:flex; align-items:center; gap:12px; transition:.2s; }
+.message-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+.message-card .code { font-size:28px; font-weight:700; color:#2980b9; min-width:120px; letter-spacing:4px; }
+.message-card .meta { flex:1; }
+.message-card .meta .msg { color:#555; font-size:13px; margin-bottom:4px; word-break:break-all; }
+.message-card .meta .time { color:#999; font-size:11px; }
+.message-card .btn-copy { padding:6px 12px; border:1px solid #2980b9; border-radius:4px; background:#fff; color:#2980b9; cursor:pointer; font-size:13px; white-space:nowrap; transition:.2s; }
+.message-card .btn-copy:hover { background:#2980b9; color:#fff; }
+.message-card .btn-copy.copied { background:#27ae60; color:#fff; border-color:#27ae60; }
+
+/* Pagination */
+#pagination { display:flex; justify-content:center; align-items:center; gap:8px; margin-top:16px; }
+#pagination button { padding:6px 14px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; font-size:13px; }
+#pagination button:disabled { opacity:.4; cursor:default; }
+#pagination .page-info { color:#888; font-size:13px; }
+
+/* Settings form */
+#settings-form { max-width:480px; }
+#settings-form label { display:block; margin-bottom:14px; font-size:14px; color:#555; }
+#settings-form input { display:block; width:100%; margin-top:4px; padding:10px 12px; border:1px solid #ddd; border-radius:6px; font-size:14px; }
+#settings-form input:focus { border-color:#2980b9; outline:none; }
+#settings-form button { padding:10px 24px; background:#2980b9; color:#fff; border:none; border-radius:6px; font-size:14px; cursor:pointer; }
+#settings-form button:hover { background:#2471a3; }
+.hint { color:#999; font-size:12px; margin-top:12px; }
+
+/* Empty state */
+.empty { text-align:center; padding:40px; color:#bbb; font-size:15px; }
