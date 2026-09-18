@@ -54,9 +54,12 @@ GOOS=linux GOARCH=amd64 go build -o relay-server .
 
 ```yaml
 server:
-  tcp_port: 9090       # 手机 TCP 连接端口
-  ws_port: 9091        # 电脑 WebSocket 端口
-  auth_token: "你的密钥" # 客户端认证 token
+   sms_tcp_port: 1885           # 手机短信验证码 TCP 连接端口
+   notify_tcp_port: 1884        # 手机应用通知 TCP 连接端口
+   ws_port: 9091                # 客户端 WebSocket 端口
+   auth_token: "token"          # 客户端认证 token
+   log_file: "relay-server.log" # log 文件名
+   max_buffer: 500              # 客户端离线时暂存消息上限
 ```
 
 ### 运行
@@ -119,32 +122,7 @@ go build -o relay-client.exe .
 
 ---
 
-## 3. 手机端对接
-
-手机端通过 TCP Socket 连接到服务器的 `tcp_port`，发送单行 JSON：
-
-```json
-{"msg":"【xx银行】您的转账验证码为123456，请勿泄露。","sms_code":"123456"}
-```
-
-| 字段 | 说明 |
-|------|------|
-| `msg` | 短信原文 |
-| `sms_code` | 提取的验证码 |
-
-### Android 示例 (Tasker)
-
-在 Tasker 中创建一个任务：
-1. **Event** → Phone → Received Text（收到短信时触发）
-2. **Action** → Net → HTTP Request：
-   - Method: `POST`（或用 TCP 插件）
-   - 或使用 "TCP Client" 插件发送 JSON
-
-也可使用 MacroDroid、Automate 等自动化工具，或专门的短信转发 App。
-
----
-
-## 4. 使用说明
+## 3. 使用说明
 
 1. 启动 Linux 服务器
 2. 启动 Windows 客户端（系统托盘出现图标）
@@ -169,11 +147,3 @@ go build -o relay-client.exe .
 | `golang.design/x/clipboard` | 系统剪贴板 |
 | `github.com/gen2brain/beeep` | Windows Toast 通知 |
 | `github.com/pkg/browser` | 打开默认浏览器 |
-
-## 端口一览
-
-| 端口 | 方向 | 协议 |
-|------|------|------|
-| 9090 | 手机 → 服务器 | TCP |
-| 9091 | 客户端 → 服务器 | WebSocket |
-| 19800 | 浏览器 → 客户端 | HTTP (仅本地) |
